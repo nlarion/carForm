@@ -1,94 +1,92 @@
-using System;
 using System.Collections.Generic;
-using Nancy.Owin;
-using Nancy;
-using Nancy.ViewEngines.Razor;
 
-namespace Cars.project1
+namespace Cars.Objects
 {
-  public class Car : NancyModule
+  public class Car
   {
     private string _makeModel;
     private string _picture;
     private int _price;
     private int _miles;
+    private static List<string> _carListString = new List<string> {};
+    private static List<Car> _carList = new List<Car> {};
 
+    public Car(string make, int price, int miles, string picture)
+    {
+        _makeModel = make;
+        _price = price;
+        _miles = miles;
+        _picture = picture;
+    }
     public bool WorthBuying(int maxPrice, int maxMiles)
     {
       return (_price < maxPrice && _miles < maxMiles);
     }
-
     public void SetMake(string makeModel)
     {
       _makeModel = makeModel;
     }
-
     public string GetMake()
     {
       return _makeModel;
     }
-
     public void SetPrice(int price)
     {
       _price = price;
     }
-
     public int GetPrice()
     {
       return _price;
     }
-
     public void SetMiles(int miles)
     {
       _miles = miles;
     }
-
     public int GetMiles()
     {
       return _miles;
     }
-
     public void SetPicture(string picture)
     {
       _picture = picture;
     }
-
     public string GetPicture()
     {
       return _picture;
     }
+    public static List<string> GetAllString()
+    {
+      return _carListString;
+    }
 
+    public static List<Car> GetAll()
+    {
+      return _carList;
+    }
+
+    public static void Save(Car car)
+    {
+      string carName = car.GetMake();
+      _carListString.Add(carName);
+      _carList.Add(car);
+    }
   }
 
   public class Program
   {
     public static void Main()
     {
-      Car porsche = new Car();
-      porsche.SetMake("2014 Porsche 911");
-      porsche.SetPrice(114991);
-      porsche.SetMiles(7864);
-      porsche.SetPicture("/Content/img/911.jpg");
+      Car porsche = new Car("2014 Porsche 911",114991,7864,"/Content/img/911.jpg");
+      Car.Save(porsche);
 
-      Car ford = new Car();
-      ford.SetMake("2011 Ford F450");
-      ford.SetPrice(55995);
-      ford.SetMiles(14241);
-      ford.SetPicture("/Content/img/f450.jpg");
+      Car ford = new Car("2011 Ford F450",55995,14241,"/Content/img/f450.jpg");
+      Car.Save(ford);
 
-      Car lexus = new Car();
-      lexus.SetMake("2013 Lexus RX 350");
-      lexus.SetPrice(44700);
-      lexus.SetMiles(20000);
-      lexus.SetPicture("/Content/img/lexus.jpg");
+      Car lexus = new Car("2013 Lexus RX 350",44700,20000,"/Content/img/lexus.jpg");
+      Car.Save(lexus);
 
-      Car mercedes = new Car();
-      mercedes.SetMake("Mercedes Benz CLS550");
-      mercedes.SetPrice(39900);
-      mercedes.SetMiles(37979);
-      mercedes.SetPicture("/Content/img/benz.JPG");
-      List<Car> CarList = new List<Car>() { porsche, ford, lexus, mercedes };
-
+      Car mercedes = new Car("Mercedes Benz CLS550",39900,37979,"/Content/img/benz.JPG");
+      Car.Save(mercedes);
     }
   }
 }

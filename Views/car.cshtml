@@ -1,9 +1,10 @@
-<h1>A fantastical adventure</h1>
+<h1>A list of cars you can afford:</h1>
 <ul>
-@foreach (Car automobile in Model)
+
+@foreach(string car in Model)
 {
-  <li>
-    @automobile.GetMake();
-  </li>
+<li>@car</li>
+
 }
+
 </ul>
