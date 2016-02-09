@@ -8,7 +8,6 @@ namespace Cars.Objects
     private string _picture;
     private int _price;
     private int _miles;
-    private static List<string> _carListString = new List<string> {};
     private static List<Car> _carList = new List<Car> {};
 
     public Car(string make, int price, int miles, string picture)
@@ -54,20 +53,12 @@ namespace Cars.Objects
     {
       return _picture;
     }
-    public static List<string> GetAllString()
-    {
-      return _carListString;
-    }
-
     public static List<Car> GetAll()
     {
       return _carList;
     }
-
     public static void Save(Car car)
     {
-      string carName = car.GetMake();
-      _carListString.Add(carName);
       _carList.Add(car);
     }
   }
