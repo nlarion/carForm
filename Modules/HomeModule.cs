@@ -15,17 +15,16 @@ namespace Cars
       Post["/car"] = _ => {
         int maxPrice = int.Parse(Request.Form["maxPrice"]);
         int maxMiles = int.Parse(Request.Form["maxMiles"]);
-        List<string> returnCarsString = new List<string>{};
+        List<Car> returnCars = new List<Car>{};
         List<Car> allCars = Car.GetAll();
         foreach (Car automobile in allCars)
         {
           if (automobile.WorthBuying(maxPrice, maxMiles))
           {
-            string carName = automobile.GetMake();
-            returnCarsString.Add(carName);
+            returnCars.Add(automobile);
           }
         }
-        return View["car.cshtml", returnCarsString];
+        return View["car.cshtml", returnCars];
       };
     }
   }

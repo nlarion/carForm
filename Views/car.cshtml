@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="Content/css/styles.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
     <h1>A list of cars you can afford:</h1>
     <ul>
-      @foreach(string car in Model)
+      @foreach(var car in Model)
       {
-        <li>@car</li>
+        <li>@car.GetMake()</li>
+        <li><img src="@car.GetPicture()" alt="your mom" /></li>
       }
     </ul>
   </body>
